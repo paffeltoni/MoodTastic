@@ -3,8 +3,8 @@
 Class Blog_Database {
     
     private static $dsn = 'mysql:host=localhost;dbname=blog';
-    private static $username = '';
-    private static $password = '';
+    private static $username = 'mgs_user';
+    private static $password = 'pa55word';
     private static $db;
 
     private function __contruct() {
@@ -18,7 +18,6 @@ Class Blog_Database {
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $e) {
                 $error_message = $e->getMessage();
-//                include('../errors/database_error.php');
                 exit();
             }
         }

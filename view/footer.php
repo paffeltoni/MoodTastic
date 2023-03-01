@@ -1,8 +1,3 @@
-
-
-            
-
-
 <footer>
         <div class="footer__social">
             <a href="https://youtube.com" target="_blank"><i class="uil uil-youtube"></i></a>

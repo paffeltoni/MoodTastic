@@ -18,8 +18,7 @@ class User {
         
     }
     
-    
-    
+  
        //method
     public function getStatus() {
         $status = "";

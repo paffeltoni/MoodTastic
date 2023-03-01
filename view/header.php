@@ -26,10 +26,9 @@
         <ul class="nav__items">
             
             
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">You Page</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="user_manager/?controllerRequest=user_show_blog_form">Blog</a></li>
+            <li><a href="user_manager/?controllerRequest=user_show_user_you_form">You Page</a></li>
+            <li><a href="extra_page.php">XtraPage</a></li>
             <li><a href="user_manager/?controllerRequest=user_show_login_form">Login</a></li>
             
             <li class="nav__profile">

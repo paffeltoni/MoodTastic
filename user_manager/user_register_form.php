@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start(); ?>
 <!--no header on this page, doesn't need a nav menu-->
 <!DOCTYPE html>
 <html lang="en">
@@ -46,10 +46,7 @@
                 <label for="avatar">User Avatar</label>
                 <input type="file" name="avatar" id="avatar">
             </div>
-            <button type="submit" name="submit" class="btn">Sign Up</button>
-            
-            <input class="btn" type="submit" value="Register"><br>    
-                       
+            <button type="submit" name="submit" class="btn">Sign Up</button>                       
             <small>Already have an account? <a href="user_login_form.php">Sign In</a></small>
         </form>
     </div>

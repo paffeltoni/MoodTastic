@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,22 +20,27 @@
     <div class="container form__section-container">
         <h2>Sign In</h2>
 
-      
+       <?php if(isset($_SESSION['signup-success'])): ?>
         <div class="alert__message success">
             <p>
-               You have successfully signed in             
+                <?= $_SESSION['signup-success'];
+                unset($_SESSION['signup-success']); ?>  
             </p>
         </div>
+        <?php elseif(isset($_SESSION['login_error'])) : ?>
             <div class="alert__message error">
                 <p>
-                    Error Message
+                    <?= $_SESSION['login_error'];
+                    unset($_SESSION['registration_error']);
+                    ?>
                 </p>
             </div>
+        <?php endif ?>
 
-         <form action="user_manager/index.php" method="post">
+         <form action="index.php" method="post">
             <input type="hidden" name="controllerRequest" value="user_process_login">   
-            <input type="text" name="username_email" value="JaneDoe@gmail.com" placeholder="Username or Email">           
-            <input type="password" name="password" value="test1234" placeholder="Password">       
+            <input type="text" name="username_email" value="something@email.com" placeholder="Username or Email">           
+            <input type="text" name="password" value="pass1234" placeholder="Password">       
             <button type="submit" name="submit" class="btn">Sign In</button>
             <small>Don't have an account? <a href="user_register_form.php">Sign Up</a></small>
         </form>
