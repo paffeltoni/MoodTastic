@@ -3,6 +3,10 @@
 require_once '../model/Blog_Database.php';
 require_once '../model/UserDB.php';
 require_once '../model/User.php';
+require_once '../model/Post.php';
+require_once '../model/PostDB.php';
+require_once '../model/Category.php';
+require_once '../model/CategoryDB.php';
 
 session_start();
 
@@ -19,44 +23,60 @@ if ($controllerChoice == NULL) {
 }
 //go through user pages 
 switch ($controllerChoice) {
+
+
+    //****************************************
+    //Show User Login Form
+    //****************************************
     case 'user_show_login_form':
         //just takes you to the login form
         header('Location: ' . ROOT_URL . 'user_manager/user_login_form.php');
         break;
-    //login form
+    //****************************************
+    // Login User
+    //****************************************
     case 'user_process_login':
-    //get the form data
-    $username_email = filter_var($_POST['username_email'], FILTER_SANITIZE_SPECIAL_CHARS);
-    $password = filter_var($_POST['password'], FILTER_SANITIZE_SPECIAL_CHARS);
+        //get the form data
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_SPECIAL_CHARS);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_SPECIAL_CHARS);
 
-    //validate input
-    if (!$username_email) {
-        $_SESSION['login_error'] = "Username or Email required";
-    } elseif (!$password) {
-        $_SESSION['login_error'] = "Password required";
-    } else {
-        $user = UserDB::getUserByUsernameOrEmailAndPassword($username_email, $password);
-        $ID = $user['ID'];
-        if ($ID > 0) {
-            $user = UserDB::getUserByID($ID);  
-            $_SESSION['user_id'] = $user->getID();
-            $_SESSION['username'] = $user->getUserName();
-            $_SESSION['email'] = $user->getEmail();
-            $_SESSION['is_admin'] = $user->getAdmin();
-            if ($user ->getAdmin() == 1) {
-                header('Location: ' . ROOT_URL . 'admin/manage_post.php');
-            } else {
-                header('Location: ' . ROOT_URL . 'user_manager/user_you_form.php');
-            }
-            exit;
+        //validate input
+        if ($email == null) {
+            $_SESSION['login_error'] = "Email required";
+        } elseif ($password == null) {
+            $_SESSION['login_error'] = "Password required";
         } else {
-            $_SESSION['login_error'] = "Invalid username/email or password";
+            $user = UserDB::getUserByUsernameOrEmailAndPassword($email, $password);
+            $ID = $user['ID'];
+            if ($ID > 0) {
+                $user = UserDB::getUserByID($ID);
+                $_SESSION['user_id'] = $user->getID();
+                $_SESSION['username'] = $user->getUserName();
+                $_SESSION['email'] = $user->getEmail();
+                $_SESSION['is_admin'] = $user->getAdmin();
+                $_SESSION['avatar'] = $user->getAvatar();
+                if ($user->getAdmin() == 1) {
+                    //Move them to the dashboard
+                     header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
+                } else {
+                    // I am leaving this statement here for later on if I decide to change where the user goes when logging in 
+                    header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
+                }
+                exit;
+            }     
+         break;
         }
-    }
-    break;
+     
+       
+    //****************************************
+    // Show Register Form
+    //****************************************
     case'user_register_form':
         include('user_register_form.php');
         break;
+    //****************************************
+    // Register Form
+    //****************************************
     case'user_registration':
         //get data from form 
         $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -88,61 +108,89 @@ switch ($controllerChoice) {
             if ($user < 0) {
                 $_SESSION['registration_error'] = "Username or Email is already in use";
             } else {
-                //1. Check the avatar
-                //2. Rename the avatar 
-                //3. Make each image unique using current timestamp
-                $time = time();
-                //4. Rename the avatar
-                $avatar_name = $time . $avatar['name'];
-                $avatar_tmp_name = $avatar['tmp_name'];
-                $avatar_destination_path = '../images/' . $avatar_name;
+               //1. Check the avatar
+                    //2. Rename the avatar
+                    //3. Make each image unique using current timestamp
+                    $time = time();
+                    //4. Rename the avatar
+                    $avatar_name = $time . '.png';
+                    $avatar_tmp_name = $avatar['tmp_name'];
+                    $avatar_destination_path = '../images/' . $avatar_name;
 
-                //5.Make sure the file is an img & check size
-                $allowed_files = ['png', 'jpg', 'jpeg'];
-                $extention = explode('.', $avatar_name);
-                $extention = end($extention);
+                    //5.Make sure the file is an img & check size
+                    $allowed_files = ['png', 'jpg', 'jpeg'];
+                    $extention = explode('.', $avatar['name']);
+                    $extention = end($extention);
 
-                if (in_array($extention, $allowed_files)) {
-                    //make sure the file size is not to large(1mb)
-                    if ($avatar['size'] < 1000000) {
-                        //upload the avatar
-                        move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
+                    if (in_array($extention, $allowed_files)) {
+                        //make sure the file size is not to large(1mb)
+                        if ($avatar['size'] < 1000000) {
+                            //upload the avatar
+                            move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
+                        } else {
+                            $avatar = "File size is to big. Should be less than 1mb";
+                        }
                     } else {
-                        $avatar = "File size is to big. Should be less than 1mb";
+                        $_SESSION['registration_error'] = "File should be png, jpg, jpeg";
                     }
-                } else {
-                    $_SESSION['registration_error'] = "File should be png, jpg, jpeg";
                 }
-            }
-            //insert the new user into the database
-            $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar);
+
+                //insert the new user into the database
+                $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar_destination_path);
+            
             //redirect to login page with success mssge
             $_SESSION['signup-success'] = "Registration success, Please login";
             header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
             die();
         }
+        
         break;
+
+    //****************************************
+    // Showing the posts / blogs 
+    //****************************************
+    case'user_show_posts_form':
+       // Get the featured post
+        $featuredPost = PostDB::getFeaturedPost();
+        // Pass the featured post to the view
+        $_SESSION['is_featured_post'] = $featuredPost;
         
+        //Get the category from the categories table using the category  id from the post
+        $category_id = $_SESSION['is_featured_post']->getCategoryID();
+        $category_name = CategoryDB::getCategoryName($category_id);
         
-        
-        
-        
-        
-        case'user_show_blog_form':
-        include('user_blog_form.php');
-        break;
-        case'blog_form':
-        //get all the data from the form   
+        //Get the authors name 
+        $author_id = $_SESSION['is_featured_post']->getAuthorID();
+        $userName = PostDB::getAuthorsUsername($author_id);
+
+        //Get the rest of the posts
+        $posts = PostDB::getAllPosts();
+        //Pass the posts to the view
+        $_SESSION['all_posts'] = $posts;
+        //get the category name for all of the posts
+         
+        include 'user_posts_form.php';
         break;
     
-    
-    
-         case'user_show_user_you_form':
+    //****************************************
+    // Show User Page
+    //****************************************
+    case'user_show_user_you_form':
         include('user_you_form.php');
         break;
-        case'#':
-        //get all the data from the form   
+    
+      //****************************************
+    // BLANK
+    //****************************************
+    case'#':
+        include('form.php');
         break;
-        
-        
+    
+      //****************************************
+    // BLANK
+    //****************************************
+    case'#':
+        include('form.php');
+        break;
+   
 }

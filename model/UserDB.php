@@ -57,23 +57,25 @@ Class UserDB {
     }
     
     //user registration 
-    public static function registerUser($firstName, $lastName, $userName, $email, $password, $avatar){
-        $db = Blog_Database::getDB();
-        $query = 'INSERT INTO users (first_name, last_name, userName, email, password, avatar, admin)
-                        VALUES(:first_name, :last_name, :userName, :email, :password, :avatar, :admin)';
+  public static function registerUser($firstName, $lastName, $userName, $email, $password, $avatar){
+    $db = Blog_Database::getDB();
+    $query = 'INSERT INTO users (first_name, last_name, userName, email, password, avatar, admin)
+                    VALUES(:first_name, :last_name, :userName, :email, :password, :avatar, :admin)';
 
-        $stmt = $db->prepare($query);
-               
-        $stmt->bindValue(':first_name', $firstName);
-        $stmt->bindValue(':last_name', $lastName);
-        $stmt->bindValue(':userName', $userName);
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':password', $password);
-        $stmt->bindValue(':avatar', $avatar);
-        $stmt->bindValue(':admin', 0);
-        $stmt->execute();
-        $stmt->closeCursor();
-    }
+    $stmt = $db->prepare($query);
+
+    $stmt->bindValue(':first_name', $firstName);
+    $stmt->bindValue(':last_name', $lastName);
+    $stmt->bindValue(':userName', $userName);
+    $stmt->bindValue(':email', $email);
+    $stmt->bindValue(':password', $password);
+    $stmt->bindValue(':avatar', $avatar);
+    $stmt->bindValue(':admin', 0);
+    $stmt->execute();
+    $stmt->closeCursor();
+}
+
+
     
     //admin add user 
     public static function adminAddUser($firstName, $lastName, $userName, $email, $password, $avatar, $admin){
@@ -92,6 +94,22 @@ Class UserDB {
         $stmt->bindValue(':admin', $admin);
         $stmt->execute();
         $stmt->closeCursor();
+    }
+    
+    //admin update user
+    public static function update_user($ID, $firstName, $lastName, $email, $admin) {
+        $db = Blog_Database::getDB();
+        $query = 'UPDATE users
+              SET  email = :email, first_name = :firstName, last_name = :lastName, admin = :admin
+              WHERE ID = :ID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':ID', $ID);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':firstName', $firstName);
+    $statement->bindValue(':lastName', $lastName);
+    $statement->bindValue(':admin', $admin);
+    $statement->execute();
+    $statement->closeCursor();    
     }
     
     //check if a user is in the database for registering
@@ -117,19 +135,4 @@ Class UserDB {
   return $user;
   }
   
-
-//Returns that admin is true
-//The binded parameter is i because we are returning a single integer... so userID is bound to true or false
-    public static function userIsAdmin($userID) {
-    $db = Blog_Database::getDB();
-    $query = "SELECT admin FROM users WHERE ID = ?";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("i", $userID);
-    $stmt->execute();
-    $stmt->bind_result($isAdmin);
-    $stmt->fetch();
-    $stmt->close();
-
-    return $isAdmin == 1;
-    }
 }

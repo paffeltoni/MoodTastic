@@ -10,26 +10,24 @@ class User {
         $this->ID = $ID;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-        $this->password = $userName;
-        $this->emailAddress = $email;
-        $this->address = $password;
+        $this->userName = $userName;
+        $this->email = $email;
+        $this->password = $password;
         $this->avatar = $avatar;
         $this->admin = $admin;
         
     }
     
-  
-       //method
-    public function getStatus() {
+    //admin method for display purposes
+      public function getStatusAdmin() {
         $status = "";
-        if ($this->isActive == 0) {
-            $status = "Active";
+        if ($this->getAdmin() == 0) {
+            $status = "User";
         } else {
-            $status = "Not Active";
+            $status = "Admin";
         }
         return $status;
     }
-    
   
     public function getID() {
         return $this->ID;

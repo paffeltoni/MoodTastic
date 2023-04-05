@@ -1,32 +1,46 @@
 <?php include'../view/header.php'; ?>
 
-<section class="form__section">
-    <div class="container form__section-container">
-        <h2>How is your day?</h2>  
-        <form action="" method="post">
-
-        <h5>Feelin like .... </h5>
-        <label>Im ... feelin' down.</label>
-        <input type="checkbox" name="down" id="">
-
-        <label>Im ... feelin' ok.</label>
-        <input type="checkbox" name="feelin alright" id="">
-
-        <label>Im ... feelin' amazing!</label>
-        <input type="checkbox" name="feelin fantastic" id="">
-
-        <h5>Im going to .... </h5>
-        <input type="checkbox" name="go into depression" id="">
-        <input type="checkbox" name="nothing" id="">
-        <input type="checkbox" name="somthing positive" id="">
 
 
-        <h5>Because of .... </h5>
-        <input type="checkbox" name="where i am at" id="">
-        <input type="checkbox" name="how i feel" id="">
-        <input type="checkbox" name="everything is perfect, i love it" id="">
-        </form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Responsive Page</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Responsive Page</h1>
+    
+    <h2>Range Bars</h2>
+    <input type="range" min="0" max="100" value="50">
+    <input type="range" min="0" max="100" value="25">
+    <input type="range" min="0" max="100" value="75">
+    
+    <h2>Graph Section</h2>
+    <div class="graph-section">
+      <div class="graph-value">80%</div>
     </div>
-</section>
+    
+    <h2>Weather and Moon Information</h2>
+    <div class="weather-section">
+      <h2>Weather and Moon Information</h2>
+      <div class="weather-info">
+        <div class="weather-item">
+          <h3>Temperature</h3>
+          <p>25&deg;C</p>
+        </div>
+        <div class="weather-item">
+          <h3>Moon Phase</h3>
+          <p>Full Moon</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+<!--Weather API-->
+
+
 
 <?php include'../view/footer.php'; ?>

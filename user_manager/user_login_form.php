@@ -31,7 +31,7 @@
             <div class="alert__message error">
                 <p>
                     <?= $_SESSION['login_error'];
-                    unset($_SESSION['registration_error']);
+                    unset($_SESSION['login_error']);
                     ?>
                 </p>
             </div>
@@ -39,7 +39,7 @@
 
          <form action="index.php" method="post">
             <input type="hidden" name="controllerRequest" value="user_process_login">   
-            <input type="text" name="username_email" value="something@email.com" placeholder="Username or Email">           
+            <input type="text" name="email" value="something@email.com" placeholder="Email">           
             <input type="text" name="password" value="pass1234" placeholder="Password">       
             <button type="submit" name="submit" class="btn">Sign In</button>
             <small>Don't have an account? <a href="user_register_form.php">Sign Up</a></small>

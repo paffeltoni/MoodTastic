@@ -1,0 +1,34 @@
+When the user enters a wrong email or password it just jumps into the register a user page, its like it
+doesn't break
+
+the hash for the password does not work in NetBeans
+
+My script does not work in NetBeans for my responsive Nav
+
+Still need to fix the error mssg for the add post page. 
+
+  <?php if(isset($_SESSION['city_error'])): ?>    
+            <p>
+                <?= $_SESSION['city_error'];
+                unset($_SESSION['city_error']);?>
+            </p>      
+        <?php endif ?>
+
+php if statement to fix errors
+
+**** Need to fix the showing of avatar - change the avatar upload to follow the way the post is uploaded
+
+*** Need to fix the moon button for the responsivness of the app - its on the wrong side and it needs to be resized
+
+After I add a post it brings me back to the manage posts tab but there is an error saying that the variable has been undifined for the foreach loop
+same with all the other things i can add
+
+add hover over effect for dashboard and log out- turn log out to a diff color the red is to much.
+
+havnt done anything with edit category
+
+also if a user has no posts make something say in error message instead of table table, user has no posts
+
+figure out why the categories array is not showing the name of the category
+
+I don't have a category page set up yet for my categories so there is the button that just stays on the same page

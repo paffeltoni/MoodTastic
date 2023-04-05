@@ -1,6 +1,6 @@
 <?php
 class Post {
-     private $ID, $title, $body, $thumbnail, $date_time, $categoryID, $authorID, $isFeatured ;
+     private $ID, $title, $body, $thumbnail, $date_time, $categoryID, $authorID, $isFeatured;
 
     public function __construct($ID, $title, $body, $thumbnail, $date_time, 
             $categoryID, $authorID, $isFeatured) {
@@ -15,6 +15,7 @@ class Post {
                 $this->isFeatured = $isFeatured;  
     }
     
+         
     public function getID() {
         return $this->ID;
     }
