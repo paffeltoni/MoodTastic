@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -8,20 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodTastic</title>
-    <!--Custom Style Sheet-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script> <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Include chartjs-plugin-datalabels library -->    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- main js script nav and you_page -->
+     <script src="../js/main.js" defer></script>
+     <script <src="../js/mood.js" defer></script>
+     
+    <!--Custom Style Sheet-->     
     <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
     <link href="../styles/styles.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" href="../styles/you_page.css"/>
-     <base href="http://localhost/MoodTastic/">
+   
+    <base href="http://localhost/MoodTastic/">
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
     <!--ICONSCOUT CDN-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <!--Script for the nav-->
-    <script src="../js/main.js" defer></script>
+   
+   
 
-    
    
 </head>
 <body>
@@ -33,32 +37,29 @@
             
             
             <li><a href="user_manager/?controllerRequest=user_show_posts_form">Posts</a></li>
-            <li><a href="user_manager/?controllerRequest=user_show_user_you_form">You Page</a></li>
-            <li><a href="extra_page.php">XtraPage</a></li>
+            <li><a href="user_manager/?controllerRequest=user_show_user_you_form">My Mood</a></li>
             <li><a href="user_manager/?controllerRequest=user_show_login_form">Login</a></li>
             
                <!--add avatar in here-->          
                <?php if (isset($_SESSION['user_id'])) : ?>
                     <li class="nav__profile">
                         <div class="avatar">           
-                            <img src="../images/avatar9.png" height="100px" alt=""/>
+                            <img src="../images_thumbnail/Moon2.png" height="100px" alt=""/>
                         </div>
                         <ul>
                             <li><a href="admin/?controllerRequest=show_user_posts">Dashboard</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="user_manager/?controllerRequest=user_logout">Logout</a></li>
                         </ul>
                     </li>
                 <?php else : ?>
                     <li><a href="<?= ROOT_URL ?>user_manager/user_login_form.php">Login</a></li>
                 <?php endif ?>
-                </div>
-            </li>
-            
-                        
-        </ul>
+          </ul> 
         <button id="open__nav-btn"><i class="uil uil-moon-eclipse"></i></button>
         <button id="close__nav-btn"><i class="uil uil-moon"></i></button>
        </div> 
+       
+    
     </nav>
     <!--END OF NAV=============================-->
    

@@ -9,10 +9,10 @@
                 <li><a href="admin/?controllerRequest=show_add_post"><i class="uil uil-cloud-moon-hail"></i><h5>Add Post</h5></a></li>
                 <li><a href="admin/?controllerRequest=show_user_posts"><i class="uil uil-cloud-exclamation"></i><h5>Manage Post</h5></a></li>
                 <!-- only show the rest of the dashboard if user is an admin -->
-                <li><a href="admin/add_user.php"><i class="uil uil-cloud-moon-hail"></i><h5>Add User</h5></a></li>
+                <li><a href="admin/?controllerRequest=add_user"><i class="uil uil-cloud-moon-hail"></i><h5>Add User</h5></a></li>
                 <li><a href="admin/?controllerRequest=admin_display_users" class=" active"><i class="uil uil-cloud-lock"></i><h5>Manage User</h5></a></li>
-                <li><a href="admin/add_category.php"><i class="uil uil-cloud-bookmark"></i><h5>Add Category</h5></a></li>
-                <li><a href=<a href="admin/?controllerRequest=admin_display_categories"  class=""><i class="uil uil-cloud-times"></i><h5>Manage Categories</h5></a></li>
+                <li><a href="admin/?controllerRequest=add_category"><i class="uil uil-cloud-bookmark"></i><h5>Add Category</h5></a></li>
+                <li><a href="admin/?controllerRequest=admin_display_categories"><i class="uil uil-cloud-times"></i><h5>Manage Categories</h5></a></li>
             </ul>
         </aside>
 

@@ -32,6 +32,10 @@ switch ($controllerChoice) {
     // Admin adds user
     //****************************************
     case 'add_user':
+        
+        //show the page
+        include 'add_user.php';
+        
         //get data from form 
         $firstName = filter_input(INPUT_POST, "firstName", FILTER_SANITIZE_SPECIAL_CHARS);
         $lastName = filter_input(INPUT_POST, "lastName", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -146,6 +150,7 @@ switch ($controllerChoice) {
     // Add Category
     //****************************************
     case 'add_category':
+        include 'add_category.php';
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
 

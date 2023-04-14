@@ -7,6 +7,8 @@ require_once '../model/Post.php';
 require_once '../model/PostDB.php';
 require_once '../model/Category.php';
 require_once '../model/CategoryDB.php';
+require_once '../model/Mood.php';
+require_once '../model/MoodDB.php';
 
 session_start();
 
@@ -57,17 +59,17 @@ switch ($controllerChoice) {
                 $_SESSION['avatar'] = $user->getAvatar();
                 if ($user->getAdmin() == 1) {
                     //Move them to the dashboard
-                     header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
+                    header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
                 } else {
                     // I am leaving this statement here for later on if I decide to change where the user goes when logging in 
                     header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
                 }
                 exit;
-            }     
-         break;
+            }
+            break;
         }
-     
-       
+
+
     //****************************************
     // Show Register Form
     //****************************************
@@ -108,89 +110,180 @@ switch ($controllerChoice) {
             if ($user < 0) {
                 $_SESSION['registration_error'] = "Username or Email is already in use";
             } else {
-               //1. Check the avatar
-                    //2. Rename the avatar
-                    //3. Make each image unique using current timestamp
-                    $time = time();
-                    //4. Rename the avatar
-                    $avatar_name = $time . '.png';
-                    $avatar_tmp_name = $avatar['tmp_name'];
-                    $avatar_destination_path = '../images/' . $avatar_name;
+                //1. Check the avatar
+                //2. Rename the avatar
+                //3. Make each image unique using current timestamp
+                $time = time();
+                //4. Rename the avatar
+                $avatar_name = $time . '.png';
+                $avatar_tmp_name = $avatar['tmp_name'];
+                $avatar_destination_path = '../images/' . $avatar_name;
 
-                    //5.Make sure the file is an img & check size
-                    $allowed_files = ['png', 'jpg', 'jpeg'];
-                    $extention = explode('.', $avatar['name']);
-                    $extention = end($extention);
+                //5.Make sure the file is an img & check size
+                $allowed_files = ['png', 'jpg', 'jpeg'];
+                $extention = explode('.', $avatar['name']);
+                $extention = end($extention);
 
-                    if (in_array($extention, $allowed_files)) {
-                        //make sure the file size is not to large(1mb)
-                        if ($avatar['size'] < 1000000) {
-                            //upload the avatar
-                            move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
-                        } else {
-                            $avatar = "File size is to big. Should be less than 1mb";
-                        }
+                if (in_array($extention, $allowed_files)) {
+                    //make sure the file size is not to large(1mb)
+                    if ($avatar['size'] < 1000000) {
+                        //upload the avatar
+                        move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
                     } else {
-                        $_SESSION['registration_error'] = "File should be png, jpg, jpeg";
+                        $avatar = "File size is to big. Should be less than 1mb";
                     }
+                } else {
+                    $_SESSION['registration_error'] = "File should be png, jpg, jpeg";
                 }
+            }
 
-                //insert the new user into the database
-                $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar_destination_path);
-            
+            //insert the new user into the database
+            $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar_destination_path);
+
             //redirect to login page with success mssge
             $_SESSION['signup-success'] = "Registration success, Please login";
             header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
             die();
         }
-        
+
         break;
 
     //****************************************
     // Showing the posts / blogs 
     //****************************************
     case'user_show_posts_form':
-       // Get the featured post
+        // Get the featured post
         $featuredPost = PostDB::getFeaturedPost();
         // Pass the featured post to the view
         $_SESSION['is_featured_post'] = $featuredPost;
-        
+
         //Get the category from the categories table using the category  id from the post
         $category_id = $_SESSION['is_featured_post']->getCategoryID();
         $category_name = CategoryDB::getCategoryName($category_id);
-        
+
         //Get the authors name 
         $author_id = $_SESSION['is_featured_post']->getAuthorID();
         $userName = PostDB::getAuthorsUsername($author_id);
 
-        //Get the rest of the posts
+        // Get the rest of the posts
         $posts = PostDB::getAllPosts();
-        //Pass the posts to the view
+        // Pass the posts to the view
         $_SESSION['all_posts'] = $posts;
-        //get the category name for all of the posts
-         
+
+        // Get the category names for all of the posts
+        $categoryNames = array();
+        foreach ($posts as $post) {
+            $categoryNames[$post->getId()] = CategoryDB::getCategoryName($post->getCategoryId());
+        }
+        $_SESSION['category_names'] = $categoryNames;
+
         include 'user_posts_form.php';
         break;
-    
-    //****************************************
-    // Show User Page
-    //****************************************
+
+    //*******************************************************************
+    // Show User Page / case statement for Weather API
+    //*******************************************************************
     case'user_show_user_you_form':
+    //****************************************
+    // WEATHER MOON API
+    //****************************************
+    case'weather':
+
+        $url = 'https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}';
+        $asiKey = 'a326f948827325b077851cc20fb9efa2';
+
+        $city = filter_input(INPUT_POST, "city", FILTER_SANITIZE_STRING);
+
+        if ($city == null) {
+            $_SESSION['city_error'] = "Please enter a city";
+        }
+        if ($city) {
+            $API_Data = file_get_contents("https://api.openweathermap.org/data/2.5/weather?q=" . $city . "&appid=a326f948827325b077851cc20fb9efa2");
+            $weatherArray = json_decode($API_Data, true);
+
+            // Get the longitude and latitude from the weather API response
+            $longitude = $weatherArray['coord']['lon'];
+            $latitude = $weatherArray['coord']['lat'];
+
+            //Make temp F
+            $tempFahrenheit = ($weatherArray['main']['temp'] - 273) * 9 / 5 + 32;
+
+            $weatherDescription = ucfirst($weatherArray['weather'][0]['description']);
+
+            // Get the current moon phase
+            $apiKey = '146f5466da3247d6bfb9ad3ebc92ee04';
+            $moonAPIUrl = "https://api.ipgeolocation.io/astronomy?apiKey=$apiKey&lat=$latitude&long=$longitude";
+            $moonAPIResponse = file_get_contents($moonAPIUrl);
+            $moonAPIResult = json_decode($moonAPIResponse, true);
+
+            //Use print r to get the array of values from your API
+            //print_r($moonAPIResult);
+            // Get the moonrise and moonset times from the API response
+            $moonrise = strtotime($moonAPIResult['moonrise']);
+            $moonset = strtotime($moonAPIResult['moonset']);
+
+            // Get the current time
+            $current_time = time();
+
+            // Determine the moon phase based on the moonrise and moonset times
+            if ($moonrise < strtotime('today') && $moonset > strtotime('today')) {
+                $moon_phase = 'Waxing Gibbous';
+            } elseif ($moonrise > strtotime('today') && $moonset > strtotime('today')) {
+                $moon_phase = 'Waxing Crescent';
+            } elseif ($moonrise < strtotime('today') && $moonset < strtotime('today')) {
+                $moon_phase = 'Waning Gibbous';
+            } elseif ($moonrise > strtotime('today') && $moonset < strtotime('today')) {
+                $moon_phase = 'Waning Crescent';
+            } else {
+                $moon_phase = 'Unknown';
+            }
+
+            // Build the weather message with temperature, weather condition, and moon phase
+            $_SESSION['weather'] = "<b>Temperature:</b> " . round($tempFahrenheit, 1) . "°F<br>";
+            $_SESSION['weather'] .= "<b>Weather Condition:</b> " . $weatherDescription . "<br>";
+            $_SESSION['weather'] .= "<b>Moon Phase:</b> " . $moon_phase;
+        }
         include('user_you_form.php');
         break;
+
+    //****************************************
+    // User MOOD LEVELS
+    //****************************************
+    case 'user_mood_levels':
+        // Retrieve form input values
+        $moodLevel = filter_input(INPUT_POST, 'moodLevelInput', FILTER_SANITIZE_SPECIAL_CHARS);
+        $stressLevel = filter_input(INPUT_POST, 'stressLevelInput', FILTER_SANITIZE_SPECIAL_CHARS);
+        $abuseLevel = filter_input(INPUT_POST, 'abuseLevelInput', FILTER_SANITIZE_SPECIAL_CHARS);
+        // get the user in session
+        $userId = $_SESSION['user_id'];
+        //insert moods to database 
+        MoodDB::insertMood($moodLevel, $stressLevel, $abuseLevel, $userId);
+
+        //get the users moods to display in the chart
+
+
+
+
+
+        include('user_you_form.php');
+        break;
+
     
-      //****************************************
+    
+    case 'user_logout':
+    // Unset all session variables
+    session_unset();
+    // Destroy the session
+    session_destroy();
+    // Redirect to the login page
+    header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
+    exit;
+    break;
+
+    //****************************************
     // BLANK
     //****************************************
     case'#':
         include('form.php');
         break;
-    
-      //****************************************
-    // BLANK
-    //****************************************
-    case'#':
-        include('form.php');
-        break;
-   
 }

@@ -11,9 +11,9 @@
                 <li><a href="admin/?controllerRequest=show_user_posts"class="active"><i class="uil uil-cloud-exclamation"></i><h5>Manage Post</h5></a></li> 
 
                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) { ?>
-                    <li><a href="admin/add_user.php"><i class="uil uil-cloud-moon-hail"></i><h5>Add User</h5></a></li>
+                    <li><a href="admin/?controllerRequest=add_user"><i class="uil uil-cloud-moon-hail"></i><h5>Add User</h5></a></li>
                     <li><a href="admin/?controllerRequest=admin_display_users"><i class="uil uil-cloud-lock"></i><h5>Manage User</h5></a></li>
-                    <li><a href="admin/add_category.php"><i class="uil uil-cloud-bookmark"></i><h5>Add Category</h5></a></li>
+                    <li><a href="admin/?controllerRequest=add_category"><i class="uil uil-cloud-bookmark"></i><h5>Add Category</h5></a></li>
                     <li><a href="admin/?controllerRequest=admin_display_categories" class=""><i class="uil uil-cloud-times"></i><h5>Manage Categories</h5></a></li> 
                 <?php } ?>
         </ul>

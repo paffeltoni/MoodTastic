@@ -42,6 +42,7 @@
 }
 
 body {
+   
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     color: var(--color-gray-200);
@@ -57,6 +58,7 @@ body {
 }
 
 section {
+    z-index: 1;
     margin-top: 3rem;
     width: 100vw;
 }
@@ -202,6 +204,7 @@ nav button{
 /*==================================================================
                                                 GENERAL POST STYLES
 ====================================================================*/
+
 .post__thumbnail{
     border-radius: var(--card-border-radius-5) 0;
     border: 1rem solid var(--color-gray-900);
@@ -228,6 +231,49 @@ nav button{
 }
 
 /*==================================================================
+                                                            About Page
+====================================================================*/
+.container.about_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(30px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.6);
+    position: relative;
+    z-index: 1;
+}
+
+.container.about_container:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: -1;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.container.about_container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.container.about_container p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+}
+
+
+/*==================================================================
                                                             FEATURED
 ====================================================================*/
 
@@ -242,13 +288,13 @@ nav button{
 }
 
 .featured .post__thumbnail{
+     z-index: 1;
     height: fit-content;
 }
 
 /*==================================================================
                                                                POSTS
 ====================================================================*/
-
 .posts__container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -334,6 +380,7 @@ footer{
 }
 
 .footer__container{
+     z-index: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
@@ -506,6 +553,7 @@ footer ul a:hover{
     }
 
     form {
+         z-index: 1;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -887,11 +935,11 @@ footer ul a:hover{
 
 
 /*------------------------------------------------------------------ 
-all pages bkgrnd code / can't get to work with code
+all pages bkgrnd code 
 /*background orbs**************************************************/
 .index_image {
   position: relative;
-  z-index: 1;
+  z-index: -1;
 }
 
 @keyframes move {
@@ -901,6 +949,7 @@ all pages bkgrnd code / can't get to work with code
 }
 
 .background {
+    z-index: -1;
     /*//First 3 lines are added in for putting things in the center of the page*/ 
     display: flex; /* enable flexbox layout */
     align-items: center; /* vertically center the content */

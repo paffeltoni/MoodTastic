@@ -1,13 +1,22 @@
-<?php include'../view/header.php';
-
-?>
+<?php include'../view/header.php';?>
 
 <section class="form__section">
     <div class="container form__section-container">
         <h2>Add Post</h2>
-        <div class="alert__message error">
-            <p>This is an error message</p>
+        
+        
+         <?php if(isset($_SESSION['add-post-error'])) : ?>
+            <div class="alert__message error">
+            <p>
+            <?=
+             $_SESSION['add-post-error'];
+             unset($_SESSION['add-post-error']);
+             ?>
+            </p>
         </div>
+        <?php endif; ?>
+        
+      
         <form action="admin/index.php" enctype="multipart/form-data" method="post" >   
             <input type="hidden" name="controllerRequest" value="add_post">
             

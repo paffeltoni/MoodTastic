@@ -1,6 +1,26 @@
 <?php include '../view/header.php'; ?>
-
-
+ <div class="background">    
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+        </div>  
+ 
 <section class="search__bar">
     <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
         <div>
@@ -38,15 +58,15 @@
 
  <!--END OF FEATURED =============================-->
 
-   <!-- Display all the other posts -->
-    <div class="container posts__container">
-        <?php foreach ($posts as $post) { ?>
+ <!-- Display all the other posts -->
+<div class="container posts__container">
+    <?php foreach ($posts as $post) { ?>
         <article class="post">
             <div class="post__thumbnail">
-                <img src="<?php echo ROOT_URL . 'images_thumbnail/' . $post->getThumbnail();?>">
+                <img src="<?php echo ROOT_URL . 'images_thumbnail/' . $post->getThumbnail(); ?>">
             </div>
             <div class="post__info">
-                <a href="category_posts.php" class="category__button"><?php echo $nameOfCategory ?></a>
+                <a href="category_posts.php" class="category__button"><?php echo $_SESSION['category_names'][$post->getId()]; ?></a>
                 <h3 class="post__title"><a href="user_manager/view_post.php"><?php echo $post->getTitle(); ?></a></h3>
                 <p class="post__body"><?php echo substr($post->getBody(), 0, 300); ?> ... continue reading click on title....</p>
                 <div class="post__author">
@@ -60,12 +80,8 @@
                 </div>
             </div>
         </article>
-   
-        <?php } ?>
-
-    </div>
-   
-   
+    <?php } ?>
+</div>
 
     
  <!--======================================END OF POSTS====================-->
