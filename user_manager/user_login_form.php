@@ -39,7 +39,7 @@
 
          <form action="index.php" method="post">
             <input type="hidden" name="controllerRequest" value="user_process_login">   
-            <input type="text" name="email" value="something@email.com" placeholder="Email">           
+            <input type="text" name="email" value="savvy@email.com" placeholder="Email">           
             <input type="text" name="password" value="pass1234" placeholder="Password">       
             <button type="submit" name="submit" class="btn">Sign In</button>
             <small>Don't have an account? <a href="user_register_form.php">Sign Up</a></small>

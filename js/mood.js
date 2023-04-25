@@ -1,66 +1,100 @@
-//*************************************************************************
-//            RANGE BAR YOU_PAGE
-//*************************************************************************
 // Get the canvas element and its context
 const ctx = document.getElementById('my_chart').getContext("2d");
-// Gradient fill
-let gradient = ctx.createLinearGradient(0,0,0,400);
-gradient.addColorStop(0,'rgba(58, 123, 213,1)');
-gradient.addColorStop(1, 'rgba(0, 210, 255,0.3)');
+
 // Represent data
 const labels = [
-    'Feeling',
-    'Stress',
-    'Abuse'
+  'Not Hot',
+  'Feeling Good',
+  'Amazing'
 ];
 
 // Represent the initial data that goes with the labels
 let data = {
-    labels,
-    datasets: [
-        {
-            // Initial points on the graph
-            data: [25, 67, 85],
-            label: 'MoodTastic Data',
-            // Adding some colors and other stuff to make the graph look good
-            fill: true,
-            backgroundColor: gradient,
-            pointBackgroundColor: '#fff'
-            
-        },
-    ],
+  labels: [],
+  datasets: [
+    {
+      data: [],
+      label: 'Feeling Level',
+      backgroundColor: 'pink',
+      borderColor: 'rgba(58, 123, 213,1)',
+      hoverBackgroundColor: 'rgba(0, 210, 255,0.7)',
+      hoverBorderColor: 'rgba(0, 210, 255,1)',
+    },
+    {
+      data: [],
+      label: 'Stress Level',
+      backgroundColor: 'lightblue',
+      borderColor: 'rgba(58, 123, 213,1)',
+      hoverBackgroundColor: 'rgba(0, 210, 255,0.7)',
+      hoverBorderColor: 'rgba(0, 210, 255,1)',
+    },
+    {
+      data: [],
+      label: 'Abuse Level',
+      backgroundColor: 'lightgreen',
+      borderColor: 'rgba(58, 123, 213,1)',
+      hoverBackgroundColor: 'rgba(0, 210, 255,0.7)',
+      hoverBorderColor: 'rgba(0, 210, 255,1)',
+    },
+  ],
 };
 
 // Configuration for the chart
 const config = {
-    type: 'line',
-    data: data,
-    options: {
-        responsive: true,
-        radius: 5,
-        hitRadius: 30,
-        hoverRadius: 20,
-        // Add any other options here as needed
-    },
+  type: 'line', // Change chart type to line
+  data: data,
+  options: {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Days of the Month'
+        }
+      },
+      y: {
+        beginAtZero: true,
+        max: 4,
+        title: {
+          display: true,
+          text: 'Mood Level'
+        },
+        ticks: {
+          callback: function (value, index, values) {
+            return labels[value - 1];
+          }
+        }
+      }
+    }
+    // Add any other options here as needed
+  },
 };
 
 // Create instance of the chart
 const myChart = new Chart(ctx, config);
 
-// Add event listener to submit button
-const submitBtn = document.querySelector('.btn');
-submitBtn.addEventListener('click', function() {
-    // Retrieve values from range inputs
-    const feelingValue = document.getElementById('moodLevelInput').value;
-    const stressValue = document.getElementById('stressLevelInput').value;
-    const abuseValue = document.getElementById('abuseLevelInput').value;
-    
-    // Update chart data with new values
-    data.datasets[0].data = [feelingValue, stressValue, abuseValue];
-    
-    // Update the chart with new data
-    myChart.update();
-});
+// Load data from server and update the chart
+fetch('user_manager/index.php', {
+  method: 'POST',
+  body: new URLSearchParams({
+    controllerRequest: 'user_mood_levels',
+  }),
+})
+.then(response => response.json())
+.then(data => {
+  // Clear previous chart data and labels
+myChart.data.labels = [];
+myChart.data.datasets[0].data = [];
+myChart.data.datasets[1].data = [];
+myChart.data.datasets[2].data = [];
 
+// Add sample data
+myChart.data.labels = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'];
+myChart.data.datasets[0].data = [3, 2, 1, 2, 3]; // Feeling Level
+myChart.data.datasets[1].data = [2, 1, 3, 1, 2]; // Stress Level
+myChart.data.datasets[2].data = [1, 2, 2, 3, 1]; // Abuse Level
 
+myChart.update(); // Update chart with new data
 
+})
+.catch(error => console.error(error));

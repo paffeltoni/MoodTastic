@@ -1,30 +1,29 @@
-<?php require_once './view/header.php'; ?>
-<section>
-<div class="background">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+<?php require_once 'view/header.php'; ?>
 
+<div class="background_floating_orbs">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 </div>  
 
     <div class="container about_container">
-        <h1>About MoodTastic</h1>
+        <h2>About MoodTastic</h2>
         <p>Welcome to our website! We are passionate about helping individuals on their journey towards overcoming addiction and living a fulfilling life. 
             Our mission is to provide a platform that empowers individuals, regardless of their background or the type of addiction they may be struggling with, to track 
             their progress and visualize the results. We believe that through tracking and visualizing data, individuals can gain insights, recognize patterns, and make positive 
@@ -66,8 +65,8 @@
         </p>
    
 </div>       
-    
-</section>
+
+
 
 
 

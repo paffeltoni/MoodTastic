@@ -28,7 +28,6 @@
                         <th>Title</th>
                         <th>Created On</th>
                         <th>Edit</th>
-                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,8 +35,13 @@
                         <tr>
                             <td><?php echo $post->getTitle(); ?></td>
                             <td><?php echo $post->getDate_Time(); ?></td>
-                            <td><a href="#" class="btn sm">Edit</a></td>
-                            <td><a href="#" class="btn sm danger">Delete</a></td>
+                      <td>   
+                         <form action="admin/index.php" method="post">
+                             <input type="hidden" name="controllerRequest" value="show_edit_post_form">
+                             <input type="hidden" name="ID" value="<?php echo $post->getID(); ?>">
+                            <button type="submit" name="submit" class="btn sm">Edit</button>
+                        </form>
+                      </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -122,5 +122,29 @@ class PostDB {
     return $username;
 }
 
+public static function getPostById($post_id) {
+    $db = Blog_Database::getDB();
+    $query = "SELECT * FROM posts WHERE id = :post_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':post_id', $post_id);
+    $stmt->execute();
+    $post = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $post;
+}
+
+public static function updatePost($postID, $title, $body) {
+    $db = Blog_Database::getDB();
+    $query = 'UPDATE posts
+              SET title = :title, body = :body
+              WHERE ID = :postID';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':postID', $postID);
+    $statement->bindValue(':title', $title);
+    $statement->bindValue(':body', $body);
+    $statement->execute();
+    $statement->closeCursor();    
+}
+
 
 }

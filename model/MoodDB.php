@@ -1,11 +1,13 @@
 <?php
 class MoodDB {
-    public static function getMoodsByCurrentUser($ID) {
+    
+    
+   public static function getMoodsByCurrentUser($ID) {
     $db = Blog_Database::getDB();
-    $query = "SELECT moods.* FROM moods
-              JOIN users ON moods.user_id = users.ID
+    $query = "SELECT mood_entries.* FROM mood_entries
+              JOIN users ON mood_entries.user_id = users.ID
               WHERE users.ID = :ID
-              ORDER BY moods.ID";
+              ORDER BY mood_entries.ID";
     $stmt = $db->prepare($query);
     $stmt->bindValue(':ID', $ID);
     $stmt->execute();
@@ -27,6 +29,7 @@ class MoodDB {
 
     return $moods;
 }
+
 
 public static function insertMood($mood_level, $stress_level, $abuse_level, $user_id) {
     // Validate user_id to ensure it exists in the users table

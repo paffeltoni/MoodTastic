@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="../styles/you_page.css"/>
 
 <?php include'../view/header.php'; ?>
-<div class="background">    
+<div class="background_floating_orbs">    
     <span></span>
     <span></span>
     <span></span>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <form action="user_manager/index.php" method="POST">
-                <input type="hidden" name="controllerRequest" value="user_mood_levels">
+                <input type="hidden" name="controllerRequest" value="user_mood_levels" id="mood-form">
                 <h2>What's your mood?</h2>
                 <label for="moodLevelInput">How are you feeling?</label>
                 <input type="range" name="moodLevelInput" id="moodLevelInput" min="1" max="100" >
@@ -63,11 +63,11 @@
                     <p class="position">detail if needed</p>       
                 </div>                                      
             </div>
-            <div>
-                <canvas id="my_chart"></canvas>  
-            </div>        
+            <div class="mood_chart">
+                <canvas id="my_chart"></canvas>       
+            </div>         
         </article>
-
+     
         <!--Box4-->
         <article class="mood_info_box flow bg-neutral-100 text-secondary-400">
             <div class="flex">
@@ -151,6 +151,8 @@
             </p>
         </article>
     </main>
+    
+      
 
     <section class="category__buttons">
         <div class="container category__buttons-container">
@@ -164,8 +166,7 @@
     </section>
     
     
-
-    
+<script src="/MoodTastic/js/mood.js" defer></script>
 
 </body>
 

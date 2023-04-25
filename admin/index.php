@@ -286,6 +286,37 @@ switch ($controllerChoice) {
         }
         break;
         
+    //****************************************
+    // Show post edit form
+    //****************************************
+    case 'show_edit_post_form':  
+        include 'edit_post.php';
+        break;
+        
+     //****************************************
+    // EDIT POST
+   //****************************************
+    case 'edit_post':
+        //what are we doing     
+        $ID = filter_input(INPUT_POST, 'ID', FILTER_VALIDATE_INT);
+        $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
+        $body = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if ($title == null || $body == null) {
+            $errorMessage = "Please fill out all fields";
+        } else {
+            //update the category into the database
+            PostDB::updatePost($ID, $title, $body);
+        }
+
+        
+        
+        
+        
+        
+        include 'edit_post.php';
+        break;
+        
         //****************************************
         // Fetch Posts based on user role
         //****************************************   

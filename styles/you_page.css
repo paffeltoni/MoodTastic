@@ -123,7 +123,7 @@ h3 {
 
 /* components */
 .mood-grid { 
-    margin-top: 80em;
+  margin-top: 90em;
   display: grid;
   gap: 2rem;
   grid-auto-columns: 1fr;
@@ -311,6 +311,18 @@ h3 {
         align-items: center;
         width: 440px;
     }
+    
+    /*//MoodChart*/
+ .mood_chart {
+     /*background-color: lightblue;*/
+    
+}
+
+.my_chart{
+    position: relative;
+    width: 50vw;
+    height: 40vh;
+}
 
 
 

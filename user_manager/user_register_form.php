@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <!--no header on this page, doesn't need a nav menu-->
 <!DOCTYPE html>
 <html lang="en">

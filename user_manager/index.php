@@ -91,17 +91,24 @@ switch ($controllerChoice) {
 
         //validate inputs - I am leaving out the avatar just in case no pic also I am going to use a session for this to throw the error mssgs 
         if (!$firstName) {
+            
             $_SESSION['registration_error'] = "Please enter First Name";
+              include('user_register_form.php');
         } else if (!$lastName) {
             $_SESSION['registration_error'] = "Please enter Last Name";
+              include('user_register_form.php');
         } else if (!$userName) {
             $_SESSION['registration_error'] = "Please enter User Name";
+              include('user_register_form.php');
         } else if (!$email) {
             $_SESSION['registration_error'] = "Please enter Email";
+              include('user_register_form.php');
         } elseif (strlen($password) < 8 || strlen($confirmPassword) < 8) {
             $_SESSION['registration_error'] = "Password should be 8+ characters";
+              include('user_register_form.php');
         } elseif ($password != $confirmPassword) {
             $_SESSION['registration_error'] = "Passwords do not match!";
+            include('user_register_form.php');
         } else {
             //if they do hash them
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -110,35 +117,34 @@ switch ($controllerChoice) {
             if ($user < 0) {
                 $_SESSION['registration_error'] = "Username or Email is already in use";
             } else {
-                //1. Check the avatar
-                //2. Rename the avatar
-                //3. Make each image unique using current timestamp
-                $time = time();
-                //4. Rename the avatar
-                $avatar_name = $time . '.png';
+                // Check the avatar
+                $avatar_name = $avatar['name'];
                 $avatar_tmp_name = $avatar['tmp_name'];
                 $avatar_destination_path = '../images/' . $avatar_name;
 
-                //5.Make sure the file is an img & check size
+                // Make sure the file is an image and check the size
                 $allowed_files = ['png', 'jpg', 'jpeg'];
-                $extention = explode('.', $avatar['name']);
-                $extention = end($extention);
+                $extention = pathinfo($avatar_name, PATHINFO_EXTENSION);
 
                 if (in_array($extention, $allowed_files)) {
-                    //make sure the file size is not to large(1mb)
+                    // Make sure the file size is not too large (1 MB)
                     if ($avatar['size'] < 1000000) {
-                        //upload the avatar
+                        // Upload the avatar
                         move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
+
+                        // Save the avatar name to the database
+                        $avatar_name_without_ext = pathinfo($avatar_name, PATHINFO_FILENAME);
+                        // Your database query here to save the $avatar_name_without_ext
                     } else {
-                        $avatar = "File size is to big. Should be less than 1mb";
+                        $avatar = "File size is too big. Should be less than 1 MB.";
                     }
                 } else {
-                    $_SESSION['registration_error'] = "File should be png, jpg, jpeg";
+                    $_SESSION['registration_error'] = "File should be PNG, JPG, or JPEG.";
                 }
             }
 
             //insert the new user into the database
-            $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar_destination_path);
+            $userId = UserDB::registerUser($firstName, $lastName, $userName, $email, $password, $avatar_name);
 
             //redirect to login page with success mssge
             $_SESSION['signup-success'] = "Registration success, Please login";
@@ -178,6 +184,15 @@ switch ($controllerChoice) {
         $_SESSION['category_names'] = $categoryNames;
 
         include 'user_posts_form.php';
+        break;
+
+    //****************************************
+    // SHOW A SINGLE POST
+    //****************************************
+    case 'show_a_single_post':
+//       show post user clicked on
+
+        include('view_selected_post.php');
         break;
 
     //*******************************************************************
@@ -260,25 +275,32 @@ switch ($controllerChoice) {
         MoodDB::insertMood($moodLevel, $stressLevel, $abuseLevel, $userId);
 
         //get the users moods to display in the chart
+        $userId = $_SESSION['user_id'];
+        $moods = MoodDB::getMoodsByCurrentUser($userId);
 
+        $moodData = [];
+        foreach ($moods as $mood) {
+            $moodData[] = [
+                'feelingValue' => $mood->getMoodLevel(),
+                'stressValue' => $mood->getStressLevel(),
+                'abuseValue' => $mood->getAbuseLevel(),
+            ];
+        }
 
+        header('Content-Type: application/json');
+        echo json_encode($moodData);
 
-
-
-        include('user_you_form.php');
         break;
 
-    
-    
     case 'user_logout':
-    // Unset all session variables
-    session_unset();
-    // Destroy the session
-    session_destroy();
-    // Redirect to the login page
-    header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
-    exit;
-    break;
+        // Unset all session variables
+        session_unset();
+        // Destroy the session
+        session_destroy();
+        // Redirect to the login page
+        header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
+        exit;
+        break;
 
     //****************************************
     // BLANK

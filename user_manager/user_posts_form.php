@@ -1,5 +1,5 @@
 <?php include '../view/header.php'; ?>
- <div class="background">    
+ <div class="background_floating_orbs">    
                                 <span></span>
                                 <span></span>
                                 <span></span>
@@ -21,16 +21,8 @@
                                 <span></span>
         </div>  
  
-<section class="search__bar">
-    <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
-        <div>
-            <i class="uil uil-search"></i>
-            <input type="search" name="search" placeholder="Search">
-        </div>
-        <button type="submit" name="submit" class="btn">Go</button>
-    </form>
-</section>
-<!--====================== END OF SEARCH ====================-->
+
+<!--====================== Featured Post ====================-->
  <?php if (isset($_SESSION['is_featured_post'])) { ?>
     <section class="featured">
         <div class="container featured__container post">
@@ -40,7 +32,7 @@
 
             <div class="post__info">
                 <a href="user_blog_form.php" class="category__button"><?php echo $category_name ?></a>
-                <h2 class="post__title"><a href="user_manager/view_post.php"><?php echo $_SESSION['is_featured_post']->getTitle(); ?></a></h2>
+                <h2 class="post__title"><a href="user_manager/?controllerRequest=show_a_single_post"><?php echo $_SESSION['is_featured_post']->getTitle(); ?></a></h2>
                 <p class="post__body"><?php echo substr($_SESSION['is_featured_post']->getBody(), 0, 300); ?> ... continue reading click on title....</p>
                 <div class="post__author">
                     <div class="post__author-avatar">
@@ -67,7 +59,12 @@
             </div>
             <div class="post__info">
                 <a href="category_posts.php" class="category__button"><?php echo $_SESSION['category_names'][$post->getId()]; ?></a>
-                <h3 class="post__title"><a href="user_manager/view_post.php"><?php echo $post->getTitle(); ?></a></h3>
+                     <h3 class="post__title">
+                    <a href="user_manager/?controllerRequest=show_a_single_post">
+                        <?php echo $post->getTitle(); ?>
+                    </a>
+                    <input type="hidden" name="post_id" value="<?php echo $post->getID(); ?>">
+                </h3>
                 <p class="post__body"><?php echo substr($post->getBody(), 0, 300); ?> ... continue reading click on title....</p>
                 <div class="post__author">
                     <div class="post__author-avatar">

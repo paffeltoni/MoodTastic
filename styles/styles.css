@@ -230,10 +230,13 @@ nav button{
     overflow: hidden;
 }
 
+
+
+
 /*==================================================================
                                                             About Page
 ====================================================================*/
-.container.about_container {
+.container.about_container { 
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;
@@ -241,8 +244,9 @@ nav button{
     border-radius: 10px;
     backdrop-filter: blur(30px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.6);
-    position: relative;
-    z-index: 1;
+    position: relative;  
+    margin-top: 10em;
+    margin-bottom: 10em;
 }
 
 .container.about_container:before {
@@ -948,7 +952,7 @@ all pages bkgrnd code
     }
 }
 
-.background {
+.background_floating_orbs {
     z-index: -1;
     /*//First 3 lines are added in for putting things in the center of the page*/ 
     display: flex; /* enable flexbox layout */
@@ -964,7 +968,7 @@ all pages bkgrnd code
     overflow: hidden;
 }
 
-.background span {
+.background_floating_orbs span {
     width: 50vmin;
     height: 50vmin;
     border-radius: 50vmin;
@@ -977,7 +981,7 @@ all pages bkgrnd code
 }
 
 
-.background span:nth-child(0) {
+.background_floating_orbs span:nth-child(0) {
     color: #43dddf;
     top: 36%;
     left: 17%;
@@ -986,7 +990,7 @@ all pages bkgrnd code
     transform-origin: -18vw 5vh;
     box-shadow: -100vmin 0 12.886644104604697vmin currentColor;
 }
-.background span:nth-child(1) {
+.background_floating_orbs span:nth-child(1) {
     color: #FFACAC;
     top: 49%;
     left: 72%;
@@ -995,7 +999,7 @@ all pages bkgrnd code
     transform-origin: 13vw 12vh;
     box-shadow: 100vmin 0 12.816857496734638vmin currentColor;
 }
-.background span:nth-child(2) {
+.background_floating_orbs span:nth-child(2) {
     color: #43dddf;
     top: 80%;
     left: 79%;
@@ -1004,7 +1008,7 @@ all pages bkgrnd code
     transform-origin: -1vw -10vh;
     box-shadow: -100vmin 0 12.589374800475014vmin currentColor;
 }
-.background span:nth-child(3) {
+.background_floating_orbs span:nth-child(3) {
     color: #f0f2ee;
     top: 29%;
     left: 59%;
@@ -1013,7 +1017,7 @@ all pages bkgrnd code
     transform-origin: 9vw -22vh;
     box-shadow: -100vmin 0 12.710753867490872vmin currentColor;
 }
-.background span:nth-child(4) {
+.background_floating_orbs span:nth-child(4) {
     color: #FFACAC;
     top: 4%;
     left: 18%;
@@ -1022,7 +1026,7 @@ all pages bkgrnd code
     transform-origin: -17vw 9vh;
     box-shadow: 100vmin 0 12.666689711940549vmin currentColor;
 }
-.background span:nth-child(5) {
+.background_floating_orbs span:nth-child(5) {
     color: #583C87;
     top: 15%;
     left: 91%;
@@ -1031,7 +1035,7 @@ all pages bkgrnd code
     transform-origin: -14vw -12vh;
     box-shadow: 100vmin 0 12.804177675289237vmin currentColor;
 }
-.background span:nth-child(6) {
+.background_floating_orbs span:nth-child(6) {
     color: #583C87;
     top: 7%;
     left: 17%;
@@ -1040,7 +1044,7 @@ all pages bkgrnd code
     transform-origin: 13vw 24vh;
     box-shadow: -100vmin 0 13.166325880559393vmin currentColor;
 }
-.background span:nth-child(7) {
+.background_floating_orbs span:nth-child(7) {
     color: #FFACAC;
     top: 46%;
     left: 60%;
@@ -1049,7 +1053,7 @@ all pages bkgrnd code
     transform-origin: -8vw -15vh;
     box-shadow: 100vmin 0 12.639082701326277vmin currentColor;
 }
-.background span:nth-child(8) {
+.background_floating_orbs span:nth-child(8) {
     color: #43dddf;
     top: 21%;
     left: 10%;
@@ -1058,7 +1062,7 @@ all pages bkgrnd code
     transform-origin: 24vw -16vh;
     box-shadow: -100vmin 0 13.372993713052535vmin currentColor;
 }
-.background span:nth-child(9) {
+.background_floating_orbs span:nth-child(9) {
     color: #f0f2ee;
     top: 78%;
     left: 21%;
@@ -1067,7 +1071,7 @@ all pages bkgrnd code
     transform-origin: 17vw -9vh;
     box-shadow: 100vmin 0 13.00361956325621vmin currentColor;
 }
-.background span:nth-child(10) {
+.background_floating_orbs span:nth-child(10) {
     color: #43dddf;
     top: 26%;
     left: 15%;
@@ -1076,7 +1080,7 @@ all pages bkgrnd code
     transform-origin: 18vw -12vh;
     box-shadow: -100vmin 0 13.179357801360522vmin currentColor;
 }
-.background span:nth-child(11) {
+.background_floating_orbs span:nth-child(11) {
     color: #583C87;
     top: 25%;
     left: 24%;
@@ -1085,7 +1089,7 @@ all pages bkgrnd code
     transform-origin: 21vw -23vh;
     box-shadow: 100vmin 0 12.73407004551872vmin currentColor;
 }
-.background span:nth-child(12) {
+.background_floating_orbs span:nth-child(12) {
     color: #583C87;
     top: 14%;
     left: 97%;
@@ -1094,7 +1098,7 @@ all pages bkgrnd code
     transform-origin: -24vw 8vh;
     box-shadow: -100vmin 0 13.095274595928814vmin currentColor;
 }
-.background span:nth-child(13) {
+.background_floating_orbs span:nth-child(13) {
     color: #43dddf;
     top: 12%;
     left: 22%;
@@ -1103,7 +1107,7 @@ all pages bkgrnd code
     transform-origin: -17vw 5vh;
     box-shadow: 100vmin 0 12.814122306979364vmin currentColor;
 }
-.background span:nth-child(14) {
+.background_floating_orbs span:nth-child(14) {
     color: #f0f2ee;
     top: 86%;
     left: 30%;
@@ -1112,7 +1116,7 @@ all pages bkgrnd code
     transform-origin: 18vw -2vh;
     box-shadow: 100vmin 0 13.355046923864208vmin currentColor;
 }
-.background span:nth-child(15) {
+.background_floating_orbs span:nth-child(15) {
     color: #f0f2ee;
     top: 36%;
     left: 21%;
@@ -1121,7 +1125,7 @@ all pages bkgrnd code
     transform-origin: -11vw -15vh;
     box-shadow: -100vmin 0 13.305973606630463vmin currentColor;
 }
-.background span:nth-child(16) {
+.background_floating_orbs span:nth-child(16) {
     color: #43dddf;
     top: 58%;
     left: 51%;
@@ -1130,7 +1134,7 @@ all pages bkgrnd code
     transform-origin: 9vw -4vh;
     box-shadow: -100vmin 0 13.308096653010823vmin currentColor;
 }
-.background span:nth-child(17) {
+.background_floating_orbs span:nth-child(17) {
     color: #43dddf;
     top: 81%;
     left: 88%;
@@ -1139,7 +1143,7 @@ all pages bkgrnd code
     transform-origin: -8vw -13vh;
     box-shadow: -100vmin 0 13.408401430465418vmin currentColor;
 }
-.background span:nth-child(18) {
+.background_floating_orbs span:nth-child(18) {
     color: #f0f2ee;
     top: 16%;
     left: 35%;
@@ -1148,7 +1152,7 @@ all pages bkgrnd code
     transform-origin: -7vw 0vh;
     box-shadow: 100vmin 0 12.748712552704447vmin currentColor;
 }
-.background span:nth-child(19) {
+.background_floating_orbs span:nth-child(19) {
     color: #f0f2ee;
     top: 73%;
     left: 75%;
