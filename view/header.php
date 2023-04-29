@@ -6,23 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MoodTastic</title>
-    
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"></script> <!-- Include Chart.js library -->
- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script> <!-- Include chartjs-plugin-datalabels library -->    
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
-    
+   
      <!-- main js script nav and you_page --> 
      <script src="../js/main.js" defer></script>
-     
-   
-     
+        
     <!--Custom Style Sheet-->     
     <link href="styles/styles.css" rel="stylesheet" type="text/css"/>
     <link href="../styles/styles.css" rel="stylesheet" type="text/css"/>
     
     <!--change the favicon image-->
-    <link rel="icon" type="../images_thumbnail/png" href="Sun1.png">
+    <link rel="shortcut icon" href="images_thumbnail/Sun1.png">
+
+
    
     <base href="http://localhost/MoodTastic/">
     <!--FONTS-->
@@ -31,9 +26,7 @@
     <!--ICONSCOUT CDN-->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
    
-   
-
-   
+  
 </head>
 <body>
 
@@ -45,8 +38,8 @@
     <?php if (isset($_SESSION['user_id'])) : ?>
         <li><a href="user_manager/?controllerRequest=user_show_user_you_form">My Mood</a></li>
         <li class="nav__profile">
-            <div class="avatar">           
-                <img src="../images/<?php echo $_SESSION['avatar']; ?>">
+            <div class="avatar">        
+                 <img src="/MoodTastic/images/<?php echo $_SESSION['avatar']; ?>">
             </div>
             <ul>
                 <li><a href="admin/?controllerRequest=show_user_posts">Dashboard</a></li>

@@ -39,6 +39,7 @@
                          <form action="admin/index.php" method="post">
                              <input type="hidden" name="controllerRequest" value="show_edit_post_form">
                              <input type="hidden" name="ID" value="<?php echo $post->getID(); ?>">
+                            <!--need to put hidden var for category id--> 
                             <button type="submit" name="submit" class="btn sm">Edit</button>
                         </form>
                       </td>

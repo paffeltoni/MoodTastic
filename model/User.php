@@ -17,17 +17,6 @@ class User {
         $this->admin = $admin;
         
     }
-    
-    //admin method for display purposes
-      public function getStatusAdmin() {
-        $status = "";
-        if ($this->getAdmin() == 0) {
-            $status = "User";
-        } else {
-            $status = "Admin";
-        }
-        return $status;
-    }
   
     public function getID() {
         return $this->ID;

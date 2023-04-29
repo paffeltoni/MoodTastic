@@ -3,7 +3,16 @@
 <section class="form__section">
     <div class="container form__section-container">
         <h2>Edit User</h2>
-        <span><?php echo $errorMessage?></span>
+      <?php if(isset($_SESSION['edit_user_error'])) : ?>
+            <div class="alert__message error">
+            <p>
+            <?=
+             $_SESSION['edit_user_error'];
+             unset($_SESSION['edit_user_error']);
+             ?>
+            </p>
+        </div>
+        <?php endif; ?>
         
          <form action="admin/index.php" method="post">
                 <input type="hidden" name="controllerRequest" value="admin_edit_user">

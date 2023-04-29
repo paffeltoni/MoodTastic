@@ -136,7 +136,7 @@ switch ($controllerChoice) {
         $admin = filter_input(INPUT_POST, "userRole", FILTER_VALIDATE_INT);
 
         if ($firstName == null || $lastName == null) {
-            $errorMessage = "Please fill out all fields";
+           $_SESSION['edit_user_error'] = "Please check all fields";
         } else {
             //update the user into the database
             UserDB::update_user($ID, $firstName, $lastName, $email, $admin);
@@ -223,7 +223,7 @@ switch ($controllerChoice) {
     //****************************************
     // Add Post
     //****************************************
-    case 'add_post':
+  case 'add_post':
         //get the user id that is in session from when they logged in user_manager/index - log in
         $author_id = $_SESSION['user_id'];
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -266,30 +266,37 @@ switch ($controllerChoice) {
             }
 
         }
-        //Redirect back to page with form data if there is any problem
-        if(isset($_SESSION['add-post-error'])){
-            $_SESSION['add-post-data'] = $_POST;
-            header('Location: ' . ROOT_URL . 'admin/add_post.php');
-            die();
-        }else{
-            //check to see if the post is featured- we only want one featured post in our database
-            //Doing this before we insert the new post so it will all come together, like magic :) 
-            //so here we are going to set isFeatured to 0 with an update statement from DB
-            if($isFeatured == 1){
-                $isFeatured = 0;
-                PostDB::updatePostFeaturedStatus($isFeatured);
-            }      
-            //insert post into posts table
-            PostDB::insertPost($title, $body, $thumbnail, $category_id, $author_id, $isFeatured);
-            header('Location: ' . ROOT_URL . 'admin/manage_post.php');
-            die();
+        //Redirect back to the same page with form data if there is any problem
+    if(isset($_SESSION['add-post-error'])){
+        $categories = CategoryDB::list_categories();
+        $_SESSION['add-post-data'] = $_POST;
+         include('add_post.php');
+        die();
+    } else {
+        //check to see if the post is featured- we only want one featured post in our database
+        //Doing this before we insert the new post so it will all come together, like magic :) 
+        //so here we are going to set isFeatured to 0 with an update statement from DB
+        if($isFeatured == 1){
+            $isFeatured = 0;
+            PostDB::updatePostFeaturedStatus($isFeatured);
+        }      
+        //insert post into posts table
+        PostDB::insertPost($title, $body, $thumbnail, $category_id, $author_id, $isFeatured);        
+        include('manage_post.php');
+        die();
+    
         }
         break;
+
         
     //****************************************
-    // Show post edit form
+    // Show post edit form / this is the click of the edit button
     //****************************************
     case 'show_edit_post_form':  
+        //Bring in the hidden variable ID to get the ID clicked
+        $ID = filter_input(INPUT_POST, 'ID', FILTER_VALIDATE_INT);
+        $post = PostDB::getPostById($ID);
+        //not completed
         include 'edit_post.php';
         break;
         
@@ -301,19 +308,20 @@ switch ($controllerChoice) {
         $ID = filter_input(INPUT_POST, 'ID', FILTER_VALIDATE_INT);
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
         $body = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
+        $thumbnail = filter_input(INPUT_POST, "thumbnail", FILTER_SANITIZE_SPECIAL_CHARS);
+        
+        
+        
+        //show the categories
+        $categories = CategoryDB::list_categories();
 
         if ($title == null || $body == null) {
             $errorMessage = "Please fill out all fields";
         } else {
             //update the category into the database
-            PostDB::updatePost($ID, $title, $body);
+            PostDB::updatePost($ID, $title, $body, $thumbnail, $categoryID, $isFeatured);
         }
-
-        
-        
-        
-        
-        
+ 
         include 'edit_post.php';
         break;
         
@@ -360,8 +368,4 @@ switch ($controllerChoice) {
     
     
     
-    
-    
-    
-     
 }

@@ -1,4 +1,4 @@
-<?php include'../view/header.php'; ?>
+<?php include'../view/header.php';?>
 
 <section class="dashboard">
     <div class="container dashboard__container">

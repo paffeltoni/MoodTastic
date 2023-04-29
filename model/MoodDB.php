@@ -58,5 +58,20 @@ public static function insertMood($mood_level, $stress_level, $abuse_level, $use
     return $result;
 }
 
+public static function getLastEntryDate($userId) {
+    $db = Blog_Database::getDB();
+    //Get the user's last entry date from the table mood_entries
+    $query = "SELECT MAX(date_time) AS last_entry_date FROM mood_entries WHERE user_id = :user_id";
+    
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':user_id', $userId);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $result['last_entry_date'];
+}
+
+
+
 
 }

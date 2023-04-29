@@ -50,7 +50,7 @@ switch ($controllerChoice) {
         } else {
             $user = UserDB::getUserByUsernameOrEmailAndPassword($email, $password);
             $ID = $user['ID'];
-            if ($ID > 0) {
+            if ($user != null) {
                 $user = UserDB::getUserByID($ID);
                 $_SESSION['user_id'] = $user->getID();
                 $_SESSION['username'] = $user->getUserName();
@@ -61,14 +61,26 @@ switch ($controllerChoice) {
                     //Move them to the dashboard
                     header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
                 } else {
-                    // I am leaving this statement here for later on if I decide to change where the user goes when logging in 
+                    //This is left in for future use if I want the user to go not to the dash.
                     header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
                 }
                 exit;
+            } else {
+                $_SESSION['login_error'] = "Incorrect email or password";
             }
-            break;
         }
 
+        //check if there is an error message
+        if (isset($_SESSION['login_error'])) {
+            //display the error message and login form on the same page
+            $_SESSION['login_error'] = "Please check your email or password.";
+            include('user_login_form.php');
+        } else {
+            //redirect to the appropriate page
+            header('Location: ' . ROOT_URL . 'admin/index.php?controllerRequest=show_user_posts');
+            exit;
+        }
+        break;
 
     //****************************************
     // Show Register Form
@@ -91,21 +103,21 @@ switch ($controllerChoice) {
 
         //validate inputs - I am leaving out the avatar just in case no pic also I am going to use a session for this to throw the error mssgs 
         if (!$firstName) {
-            
+
             $_SESSION['registration_error'] = "Please enter First Name";
-              include('user_register_form.php');
+            include('user_register_form.php');
         } else if (!$lastName) {
             $_SESSION['registration_error'] = "Please enter Last Name";
-              include('user_register_form.php');
+            include('user_register_form.php');
         } else if (!$userName) {
             $_SESSION['registration_error'] = "Please enter User Name";
-              include('user_register_form.php');
+            include('user_register_form.php');
         } else if (!$email) {
             $_SESSION['registration_error'] = "Please enter Email";
-              include('user_register_form.php');
+            include('user_register_form.php');
         } elseif (strlen($password) < 8 || strlen($confirmPassword) < 8) {
             $_SESSION['registration_error'] = "Password should be 8+ characters";
-              include('user_register_form.php');
+            include('user_register_form.php');
         } elseif ($password != $confirmPassword) {
             $_SESSION['registration_error'] = "Passwords do not match!";
             include('user_register_form.php');
@@ -169,7 +181,9 @@ switch ($controllerChoice) {
 
         //Get the authors name 
         $author_id = $_SESSION['is_featured_post']->getAuthorID();
-        $userName = PostDB::getAuthorsUsername($author_id);
+        //$userName = PostDB::getAuthorsUsername($author_id);
+       
+       $author = UserDB::getUserByID($author_id);
 
         // Get the rest of the posts
         $posts = PostDB::getAllPosts();
@@ -189,11 +203,21 @@ switch ($controllerChoice) {
     //****************************************
     // SHOW A SINGLE POST
     //****************************************
-    case 'show_a_single_post':
-//       show post user clicked on
+  case 'show_a_single_post':
+    // Get the selected post ID from the query parameters
+    $post_id = $_GET['post_id'];
+    
+    // Get the selected post from the database
+    $selected_post = PostDB::getPostById($post_id);
+    $authorID = $selected_post->getAuthorID();
+    //get the name of the author
+    $author = UserDB::getUserByID($authorID);
+    
 
-        include('view_selected_post.php');
-        break;
+    // Display the view with the selected post
+    include('view_selected_post.php');
+    break;
+
 
     //*******************************************************************
     // Show User Page / case statement for Weather API
@@ -271,9 +295,33 @@ switch ($controllerChoice) {
         $abuseLevel = filter_input(INPUT_POST, 'abuseLevelInput', FILTER_SANITIZE_SPECIAL_CHARS);
         // get the user in session
         $userId = $_SESSION['user_id'];
-        //insert moods to database 
-        MoodDB::insertMood($moodLevel, $stressLevel, $abuseLevel, $userId);
 
+        //only allow one post a day
+        // Check if the form has been submitted
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Get the current date
+            $current_date = date('Y-m-d');
+
+            // Get the date of the last entry
+            $last_entry_date = MoodDB::getLastEntryDate($userId);
+
+            if ($current_date === $last_entry_date) {
+                // The user has already made an entry today, show an error message
+                $_SESSION['data_has_been_logged_error'] = 'You have already made an entry today. Please try again tomorrow.';
+                include 'user_you_form.php';
+            } else {
+                //insert moods to database 
+                MoodDB::insertMood($moodLevel, $stressLevel, $abuseLevel, $userId);
+                 include 'user_you_form.php';
+            }
+        }
+
+        break;
+    //****************************************
+    // SHOW MOOD DATA
+    //****************************************
+    case'show_user_mood_data_chart':
         //get the users moods to display in the chart
         $userId = $_SESSION['user_id'];
         $moods = MoodDB::getMoodsByCurrentUser($userId);
@@ -287,11 +335,26 @@ switch ($controllerChoice) {
             ];
         }
 
+        // convert the moodData array to a JSON string
+        $jsonData = json_encode($moodData);
+
+        // set the appropriate headers to allow cross-origin access and indicate JSON content type
         header('Content-Type: application/json');
-        echo json_encode($moodData);
+        header('Access-Control-Allow-Origin: *');
+
+        // wrap JSON data in a callback function if a callback is provided in the request URL
+        if (isset($_GET['callback'])) {
+            echo $_GET['callback'] . '(' . $jsonData . ')';
+        } else {
+            // send the JSON string to the client
+            echo $jsonData;
+        }
 
         break;
 
+    //****************************************
+    // Log out the user
+    //****************************************
     case 'user_logout':
         // Unset all session variables
         session_unset();
@@ -301,11 +364,4 @@ switch ($controllerChoice) {
         header('location: ' . ROOT_URL . 'user_manager/user_login_form.php');
         exit;
         break;
-
-    //****************************************
-    // BLANK
-    //****************************************
-    case'#':
-        include('form.php');
-        break;
-}
+}        
