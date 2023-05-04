@@ -132,7 +132,7 @@ class PostDB {
     $record = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     $post = new Post(
-        $record['id'],
+        $record['ID'],
         $record['title'],
         $record['body'],
         $record['thumbnail'],

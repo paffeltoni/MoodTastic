@@ -150,7 +150,10 @@ switch ($controllerChoice) {
     // Add Category
     //****************************************
     case 'add_category':
+        
+        //show the page
         include 'add_category.php';
+       
         $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_SPECIAL_CHARS);
         $description = filter_input(INPUT_POST, "description", FILTER_SANITIZE_SPECIAL_CHARS);
 
@@ -167,11 +170,10 @@ switch ($controllerChoice) {
         } else {
             //insert category into database and go back to the category page
             CategoryDB::insertCategory($title, $description);
-            $_SESSION['add_category_success'] = "Category $title added successfully";
+             //redirect to manage categories if success
             header('Location: ' . ROOT_URL . 'admin/manage_categories.php');
-            die();
-        }
-        header('Location: ' . ROOT_URL . 'admin/add_category.php');
+        }   
+      
         break;
 
     //****************************************

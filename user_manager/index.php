@@ -9,6 +9,8 @@ require_once '../model/Category.php';
 require_once '../model/CategoryDB.php';
 require_once '../model/Mood.php';
 require_once '../model/MoodDB.php';
+require_once '../model/Comment.php';
+require_once '../model/CommentDB.php';
 
 session_start();
 
@@ -206,18 +208,42 @@ switch ($controllerChoice) {
   case 'show_a_single_post':
     // Get the selected post ID from the query parameters
     $post_id = $_GET['post_id'];
+      
+     // Store the post ID in the session
+    $_SESSION['selected_post_id'] = $post_id;
     
     // Get the selected post from the database
     $selected_post = PostDB::getPostById($post_id);
     $authorID = $selected_post->getAuthorID();
     //get the name of the author
     $author = UserDB::getUserByID($authorID);
-    
-
+    //*********************************************END OF EVERYTHING FOR THE POSTS 
+    //*********************************************BEGGINING OF SHOWING COMMENTS
+    //get the comments
+    $comments = CommentDB::getAllCommentsForPostByPostID($post_id);
     // Display the view with the selected post
     include('view_selected_post.php');
     break;
 
+ //****************************************
+// Enter a user's comment 
+//****************************************
+    case 'user_comment':
+    
+    $comment = filter_input(INPUT_POST, "comment", FILTER_SANITIZE_SPECIAL_CHARS);
+    $post_ID = $_SESSION['selected_post_id'];
+    $user_ID = $_SESSION['user_id'];
+    $is_Approved = 0; 
+     
+    if($comment != null){
+      $user = CommentDB::insertComment($comment, $post_ID, $user_ID, $is_Approved);
+    }else{
+        $_SESSION['comment_error_message'] = "Cannot submit without comment entry.";
+        include('view_selected_post.php');
+    }  
+       // include('view_selected_post.php');
+    
+    break;
 
     //*******************************************************************
     // Show User Page / case statement for Weather API

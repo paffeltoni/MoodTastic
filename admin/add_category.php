@@ -1,6 +1,4 @@
-<?php include'../view/header.php'; 
- session_start();
-?>
+<?php include'../view/header.php'; ?>
 
 <section class="form__section">
     <div class="container form__section-container">

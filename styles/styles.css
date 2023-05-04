@@ -31,7 +31,7 @@
                                                             GENERAL
 ====================================================================*/
 *{
-    padding: 0; 
+    padding: 0;
     margin: 0;
     outline: 0;
     border: 0;
@@ -42,7 +42,7 @@
 }
 
 body {
-   
+
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     color: var(--color-gray-200);
@@ -63,7 +63,7 @@ section {
     width: 100vw;
 }
 
- /*add or take out later, this is to center the error message ************^^^^^^*/
+/*add or take out later, this is to center the error message ************^^^^^^*/
 .section__extra-margin{
     margin-top: 7rem;
 }
@@ -159,7 +159,7 @@ nav button{
     right: 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.4); 
+    box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.4);
     visibility: hidden;
     opacity: 0;
     transition: var(--transition);
@@ -238,7 +238,7 @@ nav button{
 /*==================================================================
                                                             About Page
 ====================================================================*/
-.container.about_container { 
+.container.about_container {
     max-width: 800px;
     margin: 0 auto;
     padding: 40px;
@@ -246,7 +246,7 @@ nav button{
     border-radius: 10px;
     backdrop-filter: blur(30px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 255, 255, 0.6);
-    position: relative;  
+    position: relative;
     margin-top: 10em;
     margin-bottom: 10em;
 }
@@ -294,7 +294,7 @@ nav button{
 }
 
 .featured .post__thumbnail{
-     z-index: 1;
+    z-index: 1;
     height: fit-content;
 }
 
@@ -307,6 +307,8 @@ nav button{
     gap: 5rem;
     margin-bottom: 5rem;
 }
+
+
 
 /*==================================================================
                                                     CATEGORY BUTTONS
@@ -329,47 +331,47 @@ nav button{
                                                     SLIDER / YOUPAGE
 ====================================================================*/
 input[type="range"] {
-  -webkit-appearance: none;
-  width: 90%;
-  height: 2px;
-  background: linear-gradient(90deg, #e3f5ff, #5c4fe0);
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px hotpink, 0 0 25px hotpink;
+    -webkit-appearance: none;
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(90deg, #e3f5ff, #5c4fe0);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px hotpink, 0 0 25px hotpink;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0px 0px 5px yellow;
-  cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0px 0px 5px yellow;
+    cursor: pointer;
 }
 
 
 input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 0;
-  background: white;
-  box-shadow: 0px 0px 10px yellow;
-  cursor: pointer;
-  transform: rotate(45deg) skew(30deg, 30deg) scale(1.3);
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    background: white;
+    box-shadow: 0px 0px 10px yellow;
+    cursor: pointer;
+    transform: rotate(45deg) skew(30deg, 30deg) scale(1.3);
 }
 
 input[type="range"]::-ms-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 0;
-  background: white;
-  box-shadow: 0px 0px 10px yellow;
-  cursor: pointer;
-  transform: rotate(45deg) skew(30deg, 30deg) scale(1.3);
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    background: white;
+    box-shadow: 0px 0px 10px yellow;
+    cursor: pointer;
+    transform: rotate(45deg) skew(30deg, 30deg) scale(1.3);
 }
 
 
@@ -405,7 +407,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: pink; 
+    color: pink;
 }
 
 .footer__social a:hover{
@@ -414,7 +416,7 @@ footer{
 }
 
 .footer__container{
-     z-index: 1;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
@@ -444,8 +446,8 @@ footer ul a:hover{
     margin-top: 4rem;
 }
 
-  /*==================================================================
-                                                     (SEARCH)
+/*==================================================================
+                                                   (SEARCH)
 ====================================================================*/
 .search__bar{
     margin-top: 7rem;
@@ -482,8 +484,8 @@ footer ul a:hover{
     color: var(--color-gray-300);
 }
 
-  /*==================================================================
-                                                     (BUTTON STYLES)
+/*==================================================================
+                                                   (BUTTON STYLES)
 ====================================================================*/
 .btn{
     display: inline-block;
@@ -510,10 +512,10 @@ footer ul a:hover{
     color: var(--color-bg);
 }
 
-     /*==================================================================
-                                                    SINGLEPOST.HTML 
+/*==================================================================
+                                               SINGLEPOST.HTML 
 ====================================================================*/
-  .singlepost {
+.singlepost {
     margin: 6rem 0 2rem;
 }
 
@@ -532,211 +534,222 @@ footer ul a:hover{
     line-height: 1.7;
 }
 
-.comments {
-    margin: 6rem 0 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.comments__container {
-    width: var(--form-width);
-    background: var(--color-gray-900);
-    padding: 1rem 2rem 3rem;
-    display: flex;
-}
-
-.comments__box {
-    width: 50%;
-    padding-right: 2rem;
-}
-
-.comments__box h3 {
-    margin-bottom: 1.5rem;
-}
-
 .comments__list {
-    width: 50%;
+    background: rgba(219, 179, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(219, 179, 255, 0.3);
+    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 .comment {
-    margin-bottom: 2rem;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  background: rgb(62,120,186);
+  background: radial-gradient(circle, rgba(62,120,186,1) 18%, rgba(242,181,255,1) 96%);
+  color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ff00ff;
+  text-align: center;
 }
 
-.comments__container {
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* 1 column for the comments box, 2 columns for the post */
-  gap: 30px; /* gap between columns */
+.comment p {
+  margin: 0;
 }
 
-.comments__box {
-  grid-column: 1 / 2; /* place the comments box in the first column */
+.comment__user {
+  font-weight: bold;
+  margin-right: 10px;
 }
 
-.comments__list {
-  grid-column: 2 / 3; /* place the comments list in the second column */
+.comment__avatar {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.comment__text {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
 }
 
 
-     /*==================================================================
-                                                     CATEGORY_POSTS.HTML
+
+
+
+
+
+
+/*==================================================================
+                                                CATEGORY_POSTS.HTML
 ====================================================================*/
-    .category__title{
-        height: 15rem;
-        margin-top: 4.5rem;
-        background: var(--color-gray-900);
-        display: grid;
-        place-items: center;
-    }
+.category__title{
+    height: 15rem;
+    margin-top: 4.5rem;
+    background: var(--color-gray-900);
+    display: grid;
+    place-items: center;
+}
 
-     /*==================================================================
-                                                    EMPTY ABOUT.HTML & 
+/*==================================================================
+                                               EMPTY ABOUT.HTML & 
 ====================================================================*/
-    .empty__page{
-        height: 70vh;
-        display: grid;
-        place-items: center;
-    }
+.empty__page{
+    height: 70vh;
+    display: grid;
+    place-items: center;
+}
 
-         /*==================================================================
-                                                EVERY FORM FOR THIS WEBSITE 
+/*==================================================================
+                                       EVERY FORM FOR THIS WEBSITE 
 ====================================================================*/
-    .form__section{
-        display: grid;
-        place-items: center;
-        height: 100vh;
-    }
+.form__section{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
 
-    .form__section-container{
-        width: var(--form-width);
-    }
+.form__section-container{
+    width: var(--form-width);
+}
 
-    .alert__message{
-       
-        padding: 0.8rem 1.4rem;
-        margin-bottom: 1rem;
-        border-radius: var(--card-border-radius-2);
-    }
+.alert__message{
 
-    .alert__message.error{
-        background: var(--color-red-light);
-        color: var(--color-red);
-    }
+    padding: 0.8rem 1.4rem;
+    margin-bottom: 1rem;
+    border-radius: var(--card-border-radius-2);
+}
 
-    .alert__message.success{
-        background: var(--color-green-light);
-        color: var(--color-green);
-    }
-    /*add or take out later, this is to center the error message ************^^^^^^*/
-    .alert__message.lg{
-        text-align: center;
-    }
+.alert__message.error{
+    background: var(--color-red-light);
+    color: var(--color-red);
+}
 
-    form {
-         z-index: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
+.alert__message.success{
+    background: var(--color-green-light);
+    color: var(--color-green);
+}
+/*add or take out later, this is to center the error message ************^^^^^^*/
+.alert__message.lg{
+    text-align: center;
+}
 
-    .form__control{
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-    }
+form {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-    .form__control.inline{
-        flex-direction: row;
-        align-items: center;
-    }
+.form__control{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
 
-    input, textarea, select{
-        padding: 0.8rem 1.4rem;
-        background-color: var(--color-gray-900);
-        border-radius: var(--card-border-radius-2);
-        resize: none;
-        color: var(--color-white);
-    }
+.form__control.inline{
+    flex-direction: row;
+    align-items: center;
+}
 
-    .form__section small{
-        margin-top: 1rem;
-        display: block;
-    }
+input, textarea, select{
+    padding: 0.8rem 1.4rem;
+    background-color: var(--color-gray-900);
+    border-radius: var(--card-border-radius-2);
+    resize: none;
+    color: var(--color-white);
+}
 
-    .form__section small a{
-        color: var(--color-primary);
-    }
+.form__section small{
+    margin-top: 1rem;
+    display: block;
+}
 
-    /*==================================================================
-                                                DASHBOARD
+.form__section small a{
+    color: var(--color-primary);
+}
+
+/*==================================================================
+                                            DASHBOARD
 ====================================================================*/
-    .dashboard{
-        margin-top: 6rem;
-    }
+.dashboard{
+    margin-top: 6rem;
+}
 
-    .sidebar__toggle{
-        display: none;
-    }
+.sidebar__toggle{
+    display: none;
+}
 
-    .dashboard__container{
-        display: grid;
-        grid-template-columns: 14rem auto;
-        gap: 1rem;
-        background:var(--color-gray-900);
-        padding: 2rem;
-        margin-bottom: 5rem;
-    }
+.dashboard__container{
+    display: grid;
+    grid-template-columns: 14rem auto;
+    gap: 1rem;
+    background:var(--color-gray-900);
+    padding: 2rem;
+    margin-bottom: 5rem;
+}
 
-    .dashboard aside a{
-        background: var(--color-primary);
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        padding: 1.6rem;
-    }
+.dashboard aside a{
+    background: var(--color-primary);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 1.6rem;
+}
 
-    .dashboard aside ul li:not(:last-child) a{
-        border-bottom: 1px solid var(--color-gray-900);
-    }
+.dashboard aside ul li:not(:last-child) a{
+    border-bottom: 1px solid var(--color-gray-900);
+}
 
-    .dashboard aside a:hover{
-        background: var(--color-gray-700);
-    }
+.dashboard aside a:hover{
+    background: var(--color-gray-700);
+}
 
-    .dashboard aside a.active{
-        background-color: var(--color-gray-900);
-    }
+.dashboard aside a.active{
+    background-color: var(--color-gray-900);
+}
 
-    .dashboard main{
-        margin-left: 1.5rem;
-    }
+.dashboard main{
+    margin-left: 1.5rem;
+}
 
-    .dashboard main h2{
-        margin: 0 0 2rem 0;
-        line-height: 1;
-    }
+.dashboard main h2{
+    margin: 0 0 2rem 0;
+    line-height: 1;
+}
 
-    .dashboard main table{
-        width: 100%;
-        text-align: left;
-    }
+.dashboard main table{
+    width: 100%;
+    text-align: left;
+}
 
-    .dashboard main table th{
-        background: var(--color-gray-700);
-        padding: 0.8rem;
-        color: var(--color-white);
-    }
+.dashboard main table th{
+    background: var(--color-gray-700);
+    padding: 0.8rem;
+    color: var(--color-white);
+}
 
-    .dashboard main table td{
-        padding: 0.8rem;
-        border-bottom: 1px solid var(--color-gray-200);
-    }
+.dashboard main table td{
+    padding: 0.8rem;
+    border-bottom: 1px solid var(--color-gray-200);
+}
 
-    .dashboard main table tr:hover td{
-        background-color: var(--color-bg);
-        color: var(--color-white);
-        cursor: default;
-        transition: var(--transition);
-    }
+.dashboard main table tr:hover td{
+    background-color: var(--color-bg);
+    color: var(--color-white);
+    cursor: default;
+    transition: var(--transition);
+}
+
+
 /*==================================================================
                                         MEDIA QUERIES (MED DEVICES)
 ====================================================================*/
@@ -760,7 +773,7 @@ footer ul a:hover{
         font-size: 0.8rem;
     }
 
-   /*-------------------- NAV STYLES -----------------*/
+    /*-------------------- NAV STYLES -----------------*/
 
     nav button{
         display: inline-block;
@@ -796,8 +809,8 @@ footer ul a:hover{
         height: 4.5rem;
         display: flex;
         align-items: center;
-        box-shadow: -2rem 3rem 7rem 
-        rgba(0, 0, 0, 0.7);
+        box-shadow: -2rem 3rem 7rem
+            rgba(0, 0, 0, 0.7);
         background-color: var(--color-gray-900);
         border-top: 1px solid var(--color-bg);
         animation: animateDropdown 400ms 0s ease forwards;
@@ -817,7 +830,7 @@ footer ul a:hover{
     .nav__items li:nth-child(5){
         animation-delay: 800ms;
     }
-   
+
     /*nav dropdown animation */
     @keyframes animateDropdown {
         0%{
@@ -862,11 +875,11 @@ footer ul a:hover{
         grid-template-columns: 1fr 1fr;
     }
 
-     /*-------------------- BLOG -------------------------*/
+    /*-------------------- BLOG -------------------------*/
     .search__bar-container{
         width: 60%;
     }
-     /*-------------------- GENERAL FORM -----------------*/
+    /*-------------------- GENERAL FORM -----------------*/
     .form__section-container{
         padding: 3rem;
     }
@@ -877,7 +890,7 @@ footer ul a:hover{
         padding: 0;
         background: transparent;
     }
-    
+
     .dashboard aside h5{
         display: none;
     }
@@ -894,17 +907,17 @@ footer ul a:hover{
     .dashboard main table tr:nth-child(even){
         background: var(--color-gray-900);
     }
-    
+
     .dashboard main table tr:hover td{
         background: transparent;
     }
 
 }
-    /*================================================================
-                                         MEDIA QUERIES (SMALL DEVICES)
+/*================================================================
+                                     MEDIA QUERIES (SMALL DEVICES)
 ====================================================================*/
 @media screen and (max-width: 600px) {
-        
+
     section{
         margin-top: 2rem;
     }
@@ -941,75 +954,75 @@ footer ul a:hover{
         gap: 2rem;
     }
 
-     /*==================================================================
-                                                    MEDIA QUERIES (BLOG)
+    /*==================================================================
+                                                   MEDIA QUERIES (BLOG)
 ====================================================================*/
-.search__bar-container{
-    width: var(--container-width-md);
-}
+    .search__bar-container{
+        width: var(--container-width-md);
+    }
 
- /*-------------------- SINGLE POST -----------------*/
- .singlepost__container{
-    background: transparent;
-    padding: 0;
- }
+    /*-------------------- SINGLE POST -----------------*/
+    .singlepost__container{
+        background: transparent;
+        padding: 0;
+    }
 
- /*-------------------- GENERAL FORMS-----------------*/
- .form__section-container{
-    padding: 0;
- }
+    /*-------------------- GENERAL FORMS-----------------*/
+    .form__section-container{
+        padding: 0;
+    }
 
-  /*-------------------- DASHBOARD-------------------*/
-  .dashboard{
-    margin-top: 5rem;
-  }
+    /*-------------------- DASHBOARD-------------------*/
+    .dashboard{
+        margin-top: 5rem;
+    }
 
-  .dashboard__container{
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
+    .dashboard__container{
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 
-  .dashboard main{
-    margin: 0;
-  }
+    .dashboard main{
+        margin: 0;
+    }
 
-  .dashboard main h2{
-    margin-top: 1rem;
-  }
+    .dashboard main h2{
+        margin-top: 1rem;
+    }
 
-  .dashboard aside{
-    position: fixed;
-    box-shadow: 2rem 0 4rem rgba(0, 0, 0 , 0.4);
-    left: -100%;
-    height: 100vh;
-    transition: var(--transition);
-    background: var(--color-primary);
-  }
+    .dashboard aside{
+        position: fixed;
+        box-shadow: 2rem 0 4rem rgba(0, 0, 0 , 0.4);
+        left: -100%;
+        height: 100vh;
+        transition: var(--transition);
+        background: var(--color-primary);
+    }
 
-  .dashboard .sidebar__toggle{
-    display: inline-block;
-    background: var(--color-primary-variant);
-    color: var(--color-white);
-    position: fixed;
-    right: 0;
-    bottom: 4rem;
-    z-index: 1;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50% 0 0 50%;
-    font-size: 1.3rem;
-    cursor: pointer;
-    box-shadow: -1rem 0 2rem rgba(0, 0, 0, 0.2);
-  }
+    .dashboard .sidebar__toggle{
+        display: inline-block;
+        background: var(--color-primary-variant);
+        color: var(--color-white);
+        position: fixed;
+        right: 0;
+        bottom: 4rem;
+        z-index: 1;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50% 0 0 50%;
+        font-size: 1.3rem;
+        cursor: pointer;
+        box-shadow: -1rem 0 2rem rgba(0, 0, 0, 0.2);
+    }
 
-  .dashboard aside a h5{
-    display: inline-block;
-  }
+    .dashboard aside a h5{
+        display: inline-block;
+    }
 
-  #hide__sidebar-btn{
-    display: none;
-  }
-   
+    #hide__sidebar-btn{
+        display: none;
+    }
+
 }
 
 
@@ -1017,8 +1030,8 @@ footer ul a:hover{
 all pages bkgrnd code 
 /*background orbs**************************************************/
 .index_image {
-  position: relative;
-  z-index: -1;
+    position: relative;
+    z-index: -1;
 }
 
 @keyframes move {
@@ -1029,11 +1042,11 @@ all pages bkgrnd code
 
 .background_floating_orbs {
     z-index: -1;
-    /*//First 3 lines are added in for putting things in the center of the page*/ 
+    /*//First 3 lines are added in for putting things in the center of the page*/
     display: flex; /* enable flexbox layout */
     align-items: center; /* vertically center the content */
     justify-content: center; /* horizontally center the content */
-    
+
     position: fixed;
     width: 100vw;
     height: 100vh;
